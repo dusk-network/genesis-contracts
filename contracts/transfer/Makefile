@@ -1,5 +1,5 @@
-DUSK_TARGET_DIR ?= ../../target
-TARGET_DIR:="$(DUSK_TARGET_DIR)/dusk"
+TARGET_DIR ?= ../../target
+DUSK_TARGET_DIR:="$(TARGET_DIR)/dusk"
 
 all: ## Build the transfer contract
 	@cargo build --release
@@ -18,7 +18,7 @@ test: wasm ## Perform the contract tests defined in the host module
 
 wasm: ## Build the WASM files
 	@RUSTFLAGS="$(RUSTFLAGS) --remap-path-prefix $(HOME)= -C link-args=-zstack-size=65536" \
-	CARGO_TARGET_DIR=$(TARGET_DIR) \
+	CARGO_TARGET_DIR=$(DUSK_TARGET_DIR) \
 	cargo +dusk build \
 		--release \
 		--color=always \

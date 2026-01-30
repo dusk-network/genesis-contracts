@@ -1,11 +1,11 @@
-DUSK_TARGET_DIR ?= ../../target
-TARGET_DIR:="$(DUSK_TARGET_DIR)/dusk"
+TARGET_DIR ?= ../../target
+DUSK_TARGET_DIR:="$(TARGET_DIR)/dusk"
 
 all: wasm
 
 wasm: ## Generate the optimized WASM for the contract given
 	@RUSTFLAGS="$(RUSTFLAGS) --remap-path-prefix $(HOME)= -C link-args=-zstack-size=65536" \
-	CARGO_TARGET_DIR=$(TARGET_DIR) \
+	CARGO_TARGET_DIR=$(DUSK_TARGET_DIR) \
     	cargo +dusk build \
     		--release \
     		--color=always \
