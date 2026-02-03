@@ -29,7 +29,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.BUILD_TEST_CONTRACTS_TOKEN }}
           commit-message: "chore: update test contract binaries"
           branch: update-test-contract-binaries
           delete-branch: true
