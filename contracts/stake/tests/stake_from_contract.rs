@@ -58,7 +58,7 @@ fn stake_from_contract() -> Result<(), Error> {
         &mut session,
         ALICE_ID,
         include_bytes!(
-            "../../target/wasm32-unknown-unknown/release/alice.wasm"
+            "../../../target/wasm32-unknown-unknown/release/alice.wasm"
         ),
     )
     .expect("Deploying the alice contract should succeed");
@@ -68,7 +68,7 @@ fn stake_from_contract() -> Result<(), Error> {
         &mut session,
         CHARLIE_ID,
         include_bytes!(
-            "../../target/wasm32-unknown-unknown/release/charlie.wasm"
+            "../../../target/wasm32-unknown-unknown/release/charlie.wasm"
         ),
     )
     .expect("Deploying the charlie contract should succeed");
@@ -201,7 +201,7 @@ fn instantiate(vm: &mut VM, moonlight_pks: &[BlsPublicKey]) -> Session {
     // deploy transfer-contract
     const OWNER: [u8; 32] = [0; 32];
     let transfer_bytecode = include_bytes!(
-        "../../target/dusk/wasm64-unknown-unknown/release/transfer_contract.wasm"
+        "../../../target/dusk/wasm64-unknown-unknown/release/transfer_contract.wasm"
     );
     session
         .deploy(
@@ -215,7 +215,7 @@ fn instantiate(vm: &mut VM, moonlight_pks: &[BlsPublicKey]) -> Session {
 
     // deploy stake-contract
     let stake_bytecode = include_bytes!(
-        "../../target/dusk/wasm32-unknown-unknown/release/stake_contract.wasm"
+        "../../../target/dusk/wasm32-unknown-unknown/release/stake_contract.wasm"
     );
     session
         .deploy(

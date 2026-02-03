@@ -50,6 +50,10 @@ echo "✅ Detected: $OS-$ARCH"
 
 # Get latest release
 LATEST_TAG=$(curl -s "https://api.github.com/repos/dusk-network/rusk/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+if [ -z "$LATEST_TAG" ]; then
+    echo "❌ Failed to fetch latest release tag from GitHub. Please check your network connection or GitHub API status." >&2
+    exit 1
+fi
 VERSION=${LATEST_TAG#dusk-rusk-}
 
 echo "📦 Latest version: $VERSION"
@@ -61,7 +65,7 @@ DOWNLOAD_URL="https://github.com/dusk-network/rusk/releases/download/${LATEST_TA
 mkdir -p "$TARGET_DIR"
 
 echo "⬇️  Downloading: $FILENAME"
-curl -L -o "${TARGET_DIR}/${FILENAME}" "$DOWNLOAD_URL"
+curl --fail -L -o "${TARGET_DIR}/${FILENAME}" "$DOWNLOAD_URL" || { echo "❌ Failed to download ${DOWNLOAD_URL}"; exit 1; }
 
 echo "📂 Extracting to ${TARGET_DIR}..."
 mkdir -p "${TARGET_DIR}/rusk"
