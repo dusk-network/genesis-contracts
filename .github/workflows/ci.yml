@@ -7,24 +7,27 @@ on:
 jobs:
   dusk_analyzer:
     name: Dusk Analyzer
-    runs-on: ubuntu-latest
+    runs-on: core
     steps:
       - uses: actions/checkout@v4
+      - uses: dsherret/rust-toolchain-file@v1
       - run: cargo install --git https://github.com/dusk-network/cargo-dusk-analyzer
       - run: cargo dusk-analyzer
 
   clippy:
     name: Clippy check
-    runs-on: ubuntu-latest
+    runs-on: core
     steps:
       - uses: actions/checkout@v4
+      - uses: dsherret/rust-toolchain-file@v1
       - run: make keys
       - run: make clippy
 
   test:
     name: Run Tests
-    runs-on: ubuntu-latest
+    runs-on: core
     steps:
       - uses: actions/checkout@v4
+      - uses: dsherret/rust-toolchain-file@v1
       - run: make keys
       - run: make test
